@@ -7,8 +7,9 @@
 import SwiftData
 import SwiftUI
 
-struct EditUser: View {
+struct EditUserView: View {
     @Bindable var user: User
+    
     var body: some View {
         Form {
             TextField("Name", text: $user.name)
@@ -24,10 +25,9 @@ struct EditUser: View {
 #Preview {
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: User.self, configuration: config)
+        let container = try ModelContainer(for: User.self, configurations: config)
         let user = User(name: "Ihor", city: "Kiev", joinDate: .now)
-        
-        return EditUser(user: user)
+        return EditUserView(user: user)
             .modelContainer(container)
     } catch {
         return Text("Failed to preview, \(error.localizedDescription)")
