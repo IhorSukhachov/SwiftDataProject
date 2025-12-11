@@ -15,14 +15,14 @@ struct UsersView: View {
             Text(user.name)
         }
     }
-    init(minimumJoinDate: Date) {
+    init(minimumJoinDate: Date, sortOrder: [SortDescriptor<User>]) {
         _users = Query(filter: #Predicate<User> {user in
             user.joinDate >= minimumJoinDate
-        }, sort: \User.name)
+        }, sort: sortOrder)
     }
 }
 
 #Preview {
-    UsersView(minimumJoinDate: .now)
+    UsersView(minimumJoinDate: .now, sortOrder: [SortDescriptor(\User.name)])
         .modelContainer(for: User.self)
 }
