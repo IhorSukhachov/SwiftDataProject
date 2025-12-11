@@ -9,18 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
-    @Query(filter: #Predicate<User> {user in
-        user.name.localizedStandardContains("o") &&
-        user.city == "Kiev"
-    }, sort: \User.name) var users: [User]
+    @State private var showingUpcomingOnly: Bool = false
+//    @Query(filter: #Predicate<User> {user in
+//        user.name.localizedStandardContains("o") &&
+//        user.city == "Kiev"
+//    }, sort: \User.name) var users: [User]
     //   @State private var path = [User]()
     var body: some View {
         NavigationStack {
-            List(users) {user in
-                NavigationLink(value: user) {
-                    Text(user.name)
-                }
-            }
+            UsersView(minimumJoinDate: showingUpcomingOnly ? .now : .distantPast)
             .navigationTitle("Users")
             //            .navigationDestination(for: User.self) {user in
             //                EditUserView(user: user)
