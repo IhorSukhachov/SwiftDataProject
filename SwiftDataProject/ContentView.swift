@@ -39,6 +39,9 @@ struct ContentView: View {
                     modelContext.insert(third)
                     modelContext.insert(forth)
                 }
+                Button(showingUpcomingOnly ? "Show Everyone" : "Show Upcoming" ) {
+                    showingUpcomingOnly.toggle()
+                }
             }
         }
     }
