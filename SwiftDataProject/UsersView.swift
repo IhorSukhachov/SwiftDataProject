@@ -23,6 +23,6 @@ struct UsersView: View {
 }
 
 #Preview {
-    UsersView()
+    UsersView(minimumJoinDate: .now)
         .modelContainer(for: User.self)
 }
