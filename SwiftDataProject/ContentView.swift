@@ -10,6 +10,10 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @State private var showingUpcomingOnly: Bool = false
+    @State private var sortOrder = [
+        SortDescriptor(\User.name),
+        SortDescriptor(\User.joinDate)
+    ]
 //    @Query(filter: #Predicate<User> {user in
 //        user.name.localizedStandardContains("o") &&
 //        user.city == "Kiev"
@@ -17,7 +21,7 @@ struct ContentView: View {
     //   @State private var path = [User]()
     var body: some View {
         NavigationStack {
-            UsersView(minimumJoinDate: showingUpcomingOnly ? .now : .distantPast)
+            UsersView(minimumJoinDate: showingUpcomingOnly ? .now : .distantPast, sortOrder: sortOrder )
             .navigationTitle("Users")
             //            .navigationDestination(for: User.self) {user in
             //                EditUserView(user: user)
