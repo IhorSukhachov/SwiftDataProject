@@ -8,6 +8,7 @@ import SwiftData
 import SwiftUI
 
 struct UsersView: View {
+    @Environment(\.modelContext) var modelContext
     @Query  var users: [User]
     
     var body: some View {
@@ -25,7 +26,7 @@ struct UsersView: View {
                     .foregroundStyle(.white)
                     .clipShape(.capsule)
             }
-            
+            .onAppear(perform: addSample )
         }
         
         
@@ -35,6 +36,15 @@ struct UsersView: View {
         _users = Query(filter: #Predicate<User> {user in
             user.joinDate >= minimumJoinDate
         }, sort: sortOrder)
+    }
+    func addSample() {
+        let user1 = User(name: "Winny Jones", city: "London", joinDate: .now)
+        let job1 = Job(name: "Software Designer", priority: 2)
+        let job2 = Job(name: "Walki talkie", priority: 4)
+        modelContext.insert(user1)
+        
+        user1.jobs.append(job1)
+        user1.jobs.append(job2)
     }
 }
 
