@@ -26,8 +26,8 @@ struct UsersView: View {
                     .foregroundStyle(.white)
                     .clipShape(.capsule)
             }
-            .onAppear(perform: addSample )
-        }
+           
+        }.onAppear(perform: addSample)
         
         
         
